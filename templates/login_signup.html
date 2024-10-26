@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MoodTube</title>
+    <link rel="stylesheet" href="/static/css/global.css" />
+    <link rel="stylesheet" href="/static/css/login_signup.css" />
+
+    <script
+      src="https://kit.fontawesome.com/3d8df9be04.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="navbar">
+        <div class="navbar-a">
+          <img src="/static/assets/img/logo.png" alt="" />
+        </div>
+      </div>
+
+      <div class="hero">
+       <div class="form-container">
+        <div class="fca">
+            <div class="fcab">
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramb</p>
+                <p class="fcab-condition">if you don't have an acount </p>
+                <button class="fcab-button" id="signup-btn">Signup</button>
+            </div>
+        </div>
+        <div class="fcb">
+          
+            <div class="fcba">
+              <form id="sign-upForm" action="/signup" method="POST">
+                <input name="email" type="email"  placeholder="Enter your Email" />
+                <input name="username" type="text" placeholder="Enter your Username">
+                <input name="password" type="password" placeholder="Password">
+                <input id="submitButton" class="submit-button" type="submit">
+              </form>
+            </div>
+            <div class="fcaa">
+              <form action="/login" method="post">
+                  <input name="email_username" type="text" placeholder="Enter your Email/Username">
+                  <input name="password" type="password" placeholder="Enter your Password">
+                  <label class="remember-me-label">
+                    <input type="checkbox" name="remember" class="remember-me-checkbox">
+                    <span class="remember-me-text">Remember Me</span>
+                  </label>
+
+                  <input class="submit-button" type="submit">
+              </form>
+          </div>
+            <div class="fcbb">
+                
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scramb</p>
+                <p class="fcab-condition">if you already have an acount </p>
+                <button class="fcab-button" id="login-btn">Login</button>
+            </div>
+        </div>
+       </div>
+    </div>
+
+    <script>
+      document.getElementById("signup-btn").addEventListener("click", function(){
+        // Select the form container
+        // const formContainer = document.querySelector(".form-container");
+        const fcba = document.querySelector(".fcba");
+        const fcaa = document.querySelector(".fcaa");
+        console.log("clicked upto here")
+
+        //  Add the show-form class to trigger animation
+        fcaa.classList.add("slider-fcba");
+        fcba.classList.add("slider-fcba");
+        fcaa.classList.remove("slider-fcba2");
+        fcba.classList.remove("slider-fcba2")
+        // fcaa.classList.add("show");
+        console.log("clicked upto here 2")
+
+        fcba.classList.add("top");
+        fcaa.classList.remove("top");
+        
+
+      });
+
+      document.getElementById("login-btn").addEventListener("click", function(){
+        // Select the form container
+        // const formContainer = document.querySelector(".form-container");
+        const fcba = document.querySelector(".fcba");
+        const fcaa = document.querySelector(".fcaa");
+
+
+        //  Add the show-form class to trigger animation
+        fcaa.classList.add("slider-fcba2");
+        fcba.classList.add("slider-fcba2");
+        
+        fcaa.classList.remove("slider-fcba");
+        fcba.classList.remove("slider-fcba")
+
+        // fcaa.classList.add("hide");
+        fcaa.classList.add("top");
+        fcba.classList.remove("top");
+        // fcaa.classList.add("hide");
+
+
+      });
+    </script>
+  </body>
+</html>

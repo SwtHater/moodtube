@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MoodTube</title>
+    <link rel="stylesheet" href="/static/css/global.css" />
+    <link rel="stylesheet" href="/static/css/search_url.css" />
+
+    <script
+      src="https://kit.fontawesome.com/3d8df9be04.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Script to handle form submission -->
+    <script>
+      function analyzeVideo(event) {
+        event.preventDefault(); // Prevent the default form submission
+        const url = document.getElementById("url-type").value; // Get URL input
+
+        fetch("/analyze", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ url: url }), // Send the URL to the Flask backend
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Handle the response (redirect or display the data)
+            if (data.error) {
+              alert(data.error); // If there’s an error, show it
+            } else {
+              // Redirect to the dashboard or update the page with the result
+              window.location.href = `/dashboard?video_title=${encodeURIComponent(
+                data.video_title
+              )}&profile_pic=${encodeURIComponent(
+                data.profile_pic
+              )}&subscribers_count=${encodeURIComponent(
+                data.subscribers_count
+              )}&channel_name=${encodeURIComponent(
+                data.channel_name
+              )}&total_comments=${data.total_comments}&positive_count=${
+                data.positive_count
+              }&negative_count=${data.negative_count}&neutral_count=${
+                data.neutral_count
+              }&comments=${encodeURIComponent(
+                JSON.stringify(data.comments)
+              )}&overall_sentiment=${
+                data.overall_sentiment
+              }&most_positive_comment=${encodeURIComponent(
+                data.most_positive_comment
+              )}&most_negative_comment=${encodeURIComponent(
+                data.most_negative_comment
+              )}`;
+            }
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="navbar">
+        <div class="navbar-a">
+          <img src="/static/assets/img/logo.png" alt="" />
+        </div>
+        <div class="navbar-b">
+          <!--          <a href=""><button>LOGIN</button></a>-->
+          <!-- <img src="static/assets/img/profilee.jpg" alt="" /> -->
+        </div>
+      </div>
+
+      <div class="hero">
+        <div class="heading"><p>Search and Know</p></div>
+        <div class="heading"><p>Before Watch</p></div>
+        <div class="sub-heading">Ready to Analyse? Enter the video link.</div>
+        <!--        <form-->
+        <!--          action="/search"-->
+        <!--          method="post"-->
+        <!--          id="analyze-form"-->
+        <!--          onsubmit="analyzeVideo(event)"-->
+        <!--        >-->
+        <form id="analyze-form" onsubmit="analyzeVideo(event)">
+          <input
+            type="text"
+            name="search"
+            id="url-type"
+            placeholder="Youtube URL"
+          />
+          <input type="submit" id="url-submit" value="Get Started &rarr;" />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,280 @@
+body {
+  background: url("/static/assets/img/pexels-bm-amaro-1100375333-20716648.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+body .container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.container .navbar {
+  /* border: solid; */
+  width: 100%;
+  height: 5rem;
+  padding: 0 5rem;
+  margin-top: 2.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.container .navbar .navbar-a {
+  /* border: solid; */
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  /* width: 5rem; */
+}
+
+.container .navbar .navbar-a img {
+  height: 100%;
+  width: 100%;
+}
+
+@media (max-width: 930px) {
+  .container .navbar {
+    height: 3rem;
+    padding: 0 3rem;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 675px) {
+  .container .navbar {
+    padding: 0 1.5rem;
+  }
+}
+
+.form-container {
+  /* border: solid; */
+  width: 60rem;
+  margin: auto;
+  margin-top: 1rem;
+  height: 30rem;
+  background-color: rgba(171, 51, 51, 0.327);
+  /* filter: blur(.1rem); */
+  backdrop-filter: blur(0.1rem);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Add shadow */
+  display: flex;
+}
+
+.fca,
+.fcb {
+  /* border: solid; */
+  width: 50%;
+  height: 100%;
+}
+
+.fcb .fcaa,
+.fcb .fcba {
+  position: absolute;
+  /* width: 100%; */
+  width: 50%;
+  height: 100%;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.fcb .fcaa form,
+.fcb .fcba form {
+  display: flex;
+  flex-direction: column;
+  padding: 5rem;
+  gap: 1.5rem;
+}
+
+form input {
+  height: 3rem;
+}
+
+/* .fcaa {
+  display: none;
+} */
+
+.fcab,
+.fcbb {
+  padding: 5rem;
+}
+
+.fcab p,
+.fcbb p {
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (max-width: 980px) {
+  .form-container {
+    width: 40rem;
+    height: 25rem;
+  }
+
+  .fcb .fcaa form,
+  .fcb .fcba form {
+    padding: 3rem;
+    gap: 1.5rem;
+  }
+
+  .fcab p,
+  .fcbb p {
+    font-size: 0.8rem;
+  }
+}
+
+.slider-fcba {
+  animation: slider-login 1s ease-out forwards;
+}
+
+@keyframes slider-login {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.slider-fcba2 {
+  animation: slider-signup 1s ease-out forwards;
+}
+
+@keyframes slider-signup {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.top {
+  z-index: 5;
+}
+
+.fcab .fcab-condition,
+.fcbb .fcab-condition {
+  font-size: 1rem;
+  margin-top: 1rem;
+  color: var(--background-color);
+}
+
+.fcab .fcab-button,
+.fcbb .fcab-button {
+  background-color: transparent;
+  border: none;
+  /* padding: 0.5rem 1rem; */
+  /* margin-top: 0.5rem; */
+  /* border-radius: 5px; */
+  color: black;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.fcaa form input,
+.fcba form input {
+  background-color: rgba(206, 193, 193, 0.812);
+  padding-left: 1rem;
+  border: none;
+}
+
+.fcaa form input[type="text"] {
+  margin-top: 2rem;
+}
+
+.fcaa form .submit-button,
+.fcba form .submit-button {
+  padding: 0;
+  background-color: var(--background-color);
+  width: 7.5rem;
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  margin-top: 3rem;
+}
+
+.remember-me-label {
+  display: flex;
+  align-items: center; /* Center the checkbox and text vertically */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  margin-top: 10px; /* Add some space above */
+}
+
+.remember-me-checkbox {
+  width: 18px; /* Custom size for the checkbox */
+  height: 18px; /* Custom size for the checkbox */
+  margin-right: 10px; /* Space between checkbox and label */
+  accent-color: #007bff; /* Change checkbox color (for supported browsers) */
+}
+
+.remember-me-text {
+  font-size: 16px; /* Font size for the text */
+  color: #333; /* Text color */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+/* Optional: Add hover effects */
+.remember-me-label:hover .remember-me-text {
+  color: #007bff; /* Change text color on hover */
+}
+
+@media (max-width: 675px) {
+  body {
+    background-repeat: repeat;
+  }
+
+  .form-container {
+    width: 20rem;
+    height: 40rem;
+    /* border: solid; */
+    flex-direction: column;
+    margin-bottom: 2rem;
+  }
+  .fca,
+  .fcb {
+    /* border: solid; */
+    width: 100%;
+    height: 50%;
+  }
+
+  .fcb .fcaa,
+  .fcb .fcba {
+    width: 100%;
+    height: 50%;
+  }
+
+  .fcb .fcaa form,
+  .fcb .fcba form {
+    padding: 2rem 4rem;
+    gap: 1rem;
+  }
+
+  @keyframes slider-login {
+    from {
+      transform: translatey(0);
+    }
+    to {
+      transform: translatey(-100%);
+    }
+  }
+
+  @keyframes slider-signup {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0%);
+    }
+  }
+
+  .fcaa form .submit-button,
+  .fcba form .submit-button {
+    margin-top: 1rem;
+  }
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MoodTube</title>
+    <link rel="stylesheet" href="/static/css/global.css" />
+    <link rel="stylesheet" href="/static/css/dashboard.css" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/3d8df9be04.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Script for download as pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+  </head>
+  <body>
+    <div id="pdf-content" class="container">
+      <div class="navbar">
+        <div class="navbar-a">
+          <img src="/static/assets/img/logo.png" alt="" />
+        </div>
+        <div class="navbar-b">
+          <img src="/static/assets/img/profile.jpg" alt="" />
+          <div class="dropdown">
+            <a href="/history">History</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero">
+        <div class="section-a shadow">
+          <div class="sa-a">
+            <!-- <img src="/static/assets/img/profile.jpg" alt="" /> -->
+            <img id="p_id" src="" alt="" />
+          </div>
+          <div class="sa-b">
+            <p id="channel-name"></p>
+            <p id="total_sub"></p>
+          </div>
+        </div>
+
+        <div class="section-b shadow">
+          <p id="video-title">Video Title</p>
+        </div>
+
+        <div class="section-h shadow">
+          <p class="sh-heading">Top Five Comment</p>
+          <p id="comment-1">This is comment 1This is comment 1</p>
+          <p id="comment-2">This is comment 2</p>
+          <p id="comment-3">This is comment 3</p>
+          <p id="comment-4">This is comment 4</p>
+          <p id="comment-5">This is comment 5</p>
+        </div>
+
+        <div class="section-c">
+          <!-- <p>Google CEO Sundar Pichai and the Future ...</p> -->
+          <div class="sc-a shadow">
+            <!-- <img src="" alt="" /> -->
+            <img src="/static/assets/img/bar_chart.png" alt="Bar Chart" />
+          </div>
+          <div class="sc-b shadow">
+            <img src="/static/assets/img/pie_chart.png" alt="" />
+          </div>
+        </div>
+
+        <!-- <div class="charts">
+          <h2>Sentiment Analysis Charts</h2>
+          <div>
+              <h3>Bar Chart</h3>
+              <img src="/static/images/bar_chart.png" alt="Bar Chart" />
+          </div>
+          <div>
+              <h3>Pie Chart</h3>
+              <img src="/static/images/pie_chart.png" alt="Pie Chart" />
+          </div>
+        </div> -->
+
+        <div class="section-d shadow">
+          <p>Total comment: <span id="total-comments"></span></p>
+        </div>
+
+        <div class="section-d shadow">
+          <p>Overall Sentiment: <span id="overall-sentiment"></span></p>
+        </div>
+
+        <!-- <div class="section-e shadow">
+          <p>Most Like comment <i class="fa-solid fa-arrow-right"></i></p>
+        </div> -->
+
+        <div class="section-f shadow">
+          <p>
+            Most positive comment
+            <i class="fa-solid fa-arrow-right"
+              ><span id="most-positive-comment"></span
+            ></i>
+          </p>
+        </div>
+
+        <div class="section-g shadow">
+          <p>
+            Most Negative comment
+            <i class="fa-solid fa-arrow-right"
+              ><span id="most-negative-comment"></span
+            ></i>
+          </p>
+        </div>
+
+        <div class="section-i">
+          <a href="/logout"><button class="logout">Logout</button></a>
+          <a href="javascript:void(0);" onclick="downloadPDF()">
+            <button class="logout">Download</button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        const params = new URLSearchParams(window.location.search);
+
+        $("#channel-name").text(params.get("channel_name") || "N/A");
+        $("#p_id").attr(
+          "src",
+          params.get("profile_pic") || "static/assets/img/default_profile.jpg"
+        );
+
+        $("#total_sub").text(params.get("subscribers_count") || "N/A");
+
+        $("#video-title").text(params.get("video_title") || "N/A");
+        $("#total-comments").text(params.get("total_comments") || "N/A");
+
+        const comments = JSON.parse(params.get("comments") || "[]");
+
+        // Check if comments are available, otherwise set them to empty strings
+        $("#comment-1").text("1. " + comments[0] || "No comment");
+        $("#comment-2").text("2. " + comments[1] || "No comment");
+        $("#comment-3").text("3. " + comments[2] || "No comment");
+        $("#comment-4").text("4. " + comments[3] || "No comment");
+        $("#comment-5").text("5. " + comments[4] || "No comment");
+
+        $("#most-positive-comment").text(
+          params.get("most_positive_comment") || "N/A"
+        );
+        $("#most-negative-comment").text(
+          params.get("most_negative_comment") || "N/A"
+        );
+        $("#overall-sentiment").text(params.get("overall_sentiment"));
+      });
+
+      function downloadPDF() {
+        const element = document.getElementById("pdf-content");
+
+        // Set the options for generating the PDF
+        const options = {
+          margin: 0.5,
+          filename: "MoodTube_Report.pdf",
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true },
+          jsPDF: { unit: "in", format: "a4", orientation: "landscape" },
+        };
+
+        // Wait for the content to fully render before generating PDF
+        setTimeout(() => {
+          html2pdf().set(options).from(element).save();
+        }, 500); // Delay for content to load
+      }
+    </script>
+  </body>
+</html>

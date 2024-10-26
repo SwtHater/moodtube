@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MoodTube</title>
+    <!-- <link rel="stylesheet" href="/static/css/global.css" /> -->
+    <link rel="stylesheet" href="/static/css/history.css" />
+
+    <script
+      src="https://kit.fontawesome.com/3d8df9be04.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header class="moodtube-header">
+      <img src="/static/assets/img/logo.png" alt="MoodTube Logo" class="logo" />
+      <div class="search-section">
+        <a href="/search"><button class="search">Search</button></a>
+        <a href="/logout"><button class="search">Logout</button></a>
+        <img
+          id="profile"
+          src="/static/assets/img/profile.jpg"
+          alt="MoodTube Logo"
+          class="logo"
+        />
+      </div>
+    </header>
+    <div class="moodtube-container">
+      {% for record in history_data %}
+      <div class="video-card">
+        <div class="card-content">
+          <p class="channel-name">{{ record.channel_name }}</p>
+          <p class="video-title">{{ record.video_title }}</p>
+          <p class="date"><i class="fa fa-calendar"></i> {{ record.date }}</p>
+        </div>
+        <a
+          href="{{ url_for('download_pdf', video_id=record.search_id) }}"
+          class="download-button"
+          >Download</a
+        >
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
